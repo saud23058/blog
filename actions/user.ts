@@ -1,7 +1,39 @@
 "use server"
+import { signIn } from "@/auth";
 import { DBconnection } from "@/lib/db";
 import { userModel } from "@/models/user";
 import { hash } from "bcryptjs";
+import { CredentialsSignin } from "next-auth";
+
+
+
+
+
+
+
+export async function login(formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  
+  try {
+    await signIn("credentials", {
+      redirect:true,
+      email,
+      password,
+    })
+    return {message:"Logged In successfully"}
+  } catch (error) {
+    const err = error as CredentialsSignin
+    return err.cause
+  }
+}
+
+export async function githubAuth() {
+  await signIn("github")
+}
+
+
 
 export async function register(formData: FormData) {
   const name = formData.get("username") as string;

@@ -1,10 +1,15 @@
 "use client";
-import { register } from "@/actions/user";
+import { githubAuth, register } from "@/actions/user";
+import { signIn } from "@/auth";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 
 const Signup = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,22 +19,28 @@ const Signup = () => {
     try {
       const result = await register(formData);
       setSuccess(result.message);
-      
+       router.push('/')
     } catch (error: any) {
       setError(error?.message as string); 
     }
   };
 
+
+  const githubHandle = async () => {
+   await githubAuth()  
+ 
+}
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <form
+      <div className="w-96 h-[500px] border border-black rounded-2xl bg-gray-200 shadow-md flex flex-col justify-center items-center gap-2 font-serif">
+      <form className="flex flex-col items-center gap-2 justify-center"
         onSubmit={handleSubmit}
-        className="w-96 h-96 border border-black rounded-2xl bg-gray-200 shadow-md flex flex-col justify-center items-center gap-2 font-serif"
+        
       >
         <h1 className="text-2xl font-bold font-serif mb-3">
           Create your account
         </h1>
-        <label className="font-semibold self-start px-12" htmlFor="username">
+        <label className="font-semibold self-start" htmlFor="username">
           Username
         </label>
         <input
@@ -40,7 +51,7 @@ const Signup = () => {
           className="w-[300px] p-2 rounded-md"
           required
         />
-        <label htmlFor="email" className="self-start px-12 font-semibold">
+        <label htmlFor="email" className="self-start font-semibold">
           Email
         </label>
         <input
@@ -51,7 +62,7 @@ const Signup = () => {
           className="w-[300px] p-2 rounded-md"
           required
         />
-        <label className="font-semibold self-start px-12" htmlFor="password">
+        <label className="font-semibold self-start" htmlFor="password">
           Password
         </label>
         <input
@@ -61,16 +72,29 @@ const Signup = () => {
           placeholder="********"
           className="w-[300px] p-2 rounded-md"
           required
+          minLength={8}
         />
         {error && <p className="px-4 text-red-500">{error}</p>}
         {success && <p className="px-4 text-green-500">{success}</p>}
         <button
-          className="bg-black p-2 w-40 text-white font-bold text-xl rounded-lg hover:bg-gray-700 duration-100"
+          className="bg-black mt-2 p-2 w-60 text-white font-bold text-xl rounded-lg hover:bg-gray-700 duration-100"
           type="submit"
         >
           Signup
         </button>
-      </form>
+        
+        <p className='mb-3 '>Already have an account <Link className='text-blue-500' href='/login'>Login now</Link></p>
+        </form>
+        <form action={githubHandle}>
+        <button
+          className="bg-black p-2 mt-2 w-60 text-white font-bold rounded-lg hover:bg-gray-700 duration-100"
+          type="submit"
+         
+        >
+          Continue with Github
+        </button>
+        </form>
+        </div>
     </div>
   );
 };
