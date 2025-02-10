@@ -6,6 +6,10 @@ interface IPost extends Document {
   imageUrl: string;
   category: string;
   views: number;
+  author: {
+    id: string,
+    name:string
+  }
 }
 
 const postSchema = new Schema<IPost>(
@@ -29,7 +33,17 @@ const postSchema = new Schema<IPost>(
     },
     category: {
       type:String
-    }
+    },
+    author: {
+      id: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
   },
   {
     timestamps: true,
