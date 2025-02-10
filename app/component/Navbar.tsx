@@ -32,15 +32,9 @@ const Navbar = async () => {
               href={`/user/${session.user.id}`}
               className="h-12 w-12 flex justify-center items-center bg-blue-300 rounded-full"
             >
-              {/* <Image
-                width={48}
-                height={48}
-                className="rounded-full object-cover"
-                alt={session?.user?.name || "User"}
-                src={session.user.image || ""}
-              /> */}
+             
 
-              <span>{session.user.name?.charAt(0) }</span>
+              <span className="font-bold">{session.user?.name![0]}</span>
             </Link>
           </>
         ) : (

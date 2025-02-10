@@ -1,10 +1,10 @@
 import { githubAuth } from '@/actions/user'
+
 import React from 'react'
 
 const GithubButton = () => {
   const githubHandle = async () => {
-    await githubAuth()  
-  
+    await githubAuth()
  }
   return (
     <form

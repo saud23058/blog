@@ -24,7 +24,8 @@ export async function login(formData: FormData) {
 }
 
 export async function githubAuth() {
-  await signIn("github");
+  await signIn("github",{redirectTo:('/')});
+  
 }
 
 export async function register(formData: FormData) {

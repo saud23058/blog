@@ -43,6 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           username: user.name,
           email: user.email,
           id: user._id,
+          image: user.image,
         };
         return userData;
       },
@@ -57,6 +58,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
 
   callbacks: {
+
     session: async ({ session, token }) => {
       if (token?.sub) {
         session.user.id = token.sub;
@@ -66,22 +68,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: async ({ account, user }) => {
       if (account?.provider === "github") {
         try {
-          const email = user.email || account?.providerAccountId + "@github.com"; // 
+          const email =
+            user.email || account?.providerAccountId + "@github.com";
           const name = user.name;
           const image = user.image;
-          
-          
-    
+
           const isExist = await userModel.findOne({ email });
           if (!isExist) {
             await userModel.create({ email, name, image });
           }
         } catch (error: any) {
-          throw new Error("Unable to continue through GitHub: " + error.message);
+          throw new Error(
+            "Unable to continue through GitHub: " + error.message
+          );
         }
       }
+
       return true;
-    }
+    },
   },
 
   secret: process.env.AUTH_SECRET,
