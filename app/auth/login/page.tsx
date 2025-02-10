@@ -1,12 +1,13 @@
 "use client";
-import { githubAuth, login } from "@/actions/user";
+import { login } from "@/actions/user";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 import React, { useState } from "react";
+import GithubButton from "../../component/GithubButton";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const router = useRouter();
+  const router = useRouter(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,15 +15,12 @@ const Login = () => {
     const formData = new FormData(event.currentTarget);
     try {
       await login(formData);
-      router.push("/");
+      router.push("/"); 
     } catch (error: any) {
       setError(error?.message as string);
     }
   };
-  const githubHandle = async () => {
-   await githubAuth()  
- 
-}
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-96 h-[500px] border border-black rounded-2xl bg-gray-200 shadow-md flex flex-col justify-center items-center gap-2 font-serif">
@@ -68,17 +66,7 @@ const Login = () => {
             </Link>
           </p>
         </form>
-        <form
-         action={githubHandle}
-        >
-          <button
-            className="bg-black p-2 mt-2 w-60 text-white font-bold rounded-lg hover:bg-gray-700 duration-100"
-            type="submit"
-          >
-            Continue with GitHub
-          </button>
-        </form>
-       
+        <GithubButton />
       </div>
     </div>
   );
