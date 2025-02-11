@@ -16,7 +16,7 @@ const PostCard = ({ post }: { post: PostCardType }) => {
   } = post;
 
   return (
-    <div className="w-[320px] h-[471px] rounded-[22px] bg-green-400 border-black border-[5px] px-6 pt-2">
+    <div className="w-[320px] h-[471px] rounded-[22px] border-black mb-3 border-[5px] bg-white px-6 pt-2 hover:bg-pink-200 cursor-pointer">
       <div className="flex justify-between items-center mt-4 ">
         <span className="bg-pink-300 w-max  rounded-lg text-center text-sm p-2">
           {formateDate(createdAt)}
@@ -42,7 +42,7 @@ const PostCard = ({ post }: { post: PostCardType }) => {
       <div className="flex justify-between items-center mt-4">
         <h3>{category}</h3>
         <button className="bg-black w-20 p-3  rounded-2xl text-white">
-          <Link href={`/post/post-detail/${1}`}>Details</Link>
+          <Link href={`/post/post-details/${1}`}>Details</Link>
         </button>
       </div>
     </div>

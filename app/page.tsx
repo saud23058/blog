@@ -1,8 +1,9 @@
+
 import PostCard from "./component/PostCard"
 import Searchbox from "./component/Searchbox"
 
 
-const Home = () => {
+const Home = async() => {
   const post = [
     {
       _id: "1",
@@ -13,15 +14,21 @@ const Home = () => {
       views: 100,
       author: {
         id: "123",
-        name: "John Doe",
+        name: "Saud",
       },
       createdAt: "2023-10-01T12:00:00Z",
     },
   ];
+
+ 
+ 
+  
+
+
   return (
     <>
       <div className="w-full bg-pink-600 min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;">
-        <h1 className="w-max bg-black text-3xl px-3 py-8 text-white font-extrabold">Create your post, Connect with other Developers</h1>
+        <h1 className="w-max bg-black rounded-md  text-3xl px-3 py-8 text-white font-extrabold">Create your post, Connect with other Developers</h1>
         <p className="mt-3 text-white ">Submit your ideas, Solutions and Get Noticed in Virtual Competition</p>
         <Searchbox/>
       </div>

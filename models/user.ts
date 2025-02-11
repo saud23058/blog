@@ -6,6 +6,7 @@ interface IUser extends Document {
   password: string;
   image: string;
   posts: string[];
+  bio: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -31,6 +32,9 @@ const userSchema = new Schema<IUser>({
       ref: "Post",
     },
   ],
+  bio: {
+    type:String
+  }
 
 },
   {

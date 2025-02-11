@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@uiw/react-md-editor": "^4.0.5",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "markdown-it": "^14.1.0",
     "mongoose": "^8.10.0",
     "next": "15.1.6",
     "next-auth": "^5.0.0-beta.25",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

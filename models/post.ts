@@ -9,7 +9,8 @@ interface IPost extends Document {
   author: {
     id: string,
     name:string
-  }
+  },
+  details:string
 }
 
 const postSchema = new Schema<IPost>(
@@ -44,6 +45,9 @@ const postSchema = new Schema<IPost>(
         required: true,
       },
     },
+    detail: {
+      type:String
+    }
   },
   {
     timestamps: true,

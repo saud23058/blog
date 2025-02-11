@@ -16,7 +16,7 @@ const Navbar = async () => {
           <>
             <button className="font-bold">
             <Link
-              href='/post/create'
+              href='/post/create-post'
               >
                 create
             </Link>
