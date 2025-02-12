@@ -5,9 +5,6 @@ export type PostCardType = {
   imageUrl: string;
   category: string;
   views: number;
-  author: {
-    _id: string;
-    name: string;
-  };
   createdAt: string;
+  detail:string
 };

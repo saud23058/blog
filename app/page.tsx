@@ -1,47 +1,38 @@
+import PostCard from "./component/PostCard";
+import { PostCardType } from "@/lib/types";
+import Link from "next/link";
 
-import PostCard from "./component/PostCard"
-import Searchbox from "./component/Searchbox"
 
 
-const Home = async() => {
-  const post = [
-    {
-      _id: "1",
-      title: "My First Post",
-      description: "This is a sample post description.",
-      imageUrl: "",
-      category: "Technology",
-      views: 100,
-      author: {
-        id: "123",
-        name: "Saud",
-      },
-      createdAt: "2023-10-01T12:00:00Z",
-    },
-  ];
-
- 
- 
-  
-
+const Home = async () => {
+  const response = await fetch(`${process.env.URL}/api/post/fetch-all-posts`, {
+    cache: "no-store", 
+  });
+  const { posts } = await response.json();
 
   return (
     <>
       <div className="w-full bg-pink-600 min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;">
-        <h1 className="w-max bg-black rounded-md  text-3xl px-3 py-8 text-white font-extrabold">Create your post, Connect with other Developers</h1>
-        <p className="mt-3 text-white ">Submit your ideas, Solutions and Get Noticed in Virtual Competition</p>
-        <Searchbox/>
+        <h1 className="w-max bg-black rounded-md text-3xl px-3 py-8 text-white font-extrabold">
+          Create your post, Connect with other Developers
+        </h1>
+        <p className="mt-3 text-white">
+          Submit your ideas, Solutions and Get Noticed in Virtual Competition
+        </p>
+        <Link href='/post/search-posts'>
+          <button className="w-[200px] py-5 mt-4 bg-black text-white items-center font-bold text-xl rounded-2xl">Search Posts</button>
+          
+        </Link>
+       
       </div>
-      <ul className="mt-7 px-6 grid grid-cols-5 ">
-        {
-          post.map((p) => {
-            return <PostCard key={p._id} post={ p} />
-          })
-        }
-
+      <ul className="mt-7 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        {posts.map((post: PostCardType) => (
+          <PostCard key={post._id} post={post} />
+        ))}
       </ul>
+      
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

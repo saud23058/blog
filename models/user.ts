@@ -5,8 +5,9 @@ interface IUser extends Document {
   email: string;
   password: string;
   image: string;
-  posts: string[];
+  // posts: string[]; i can't do this if log in through github
   bio: string;
+  providerId:string
 }
 
 const userSchema = new Schema<IUser>({
@@ -26,13 +27,16 @@ const userSchema = new Schema<IUser>({
   image: {
     type: String,
   },
-  posts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
-    },
-  ],
+  // posts: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Post",
+  //   },
+  // ],
   bio: {
+    type:String
+  },
+  providerId: {
     type:String
   }
 

@@ -4,6 +4,7 @@ import { DBconnection } from "@/lib/db";
 import { userModel } from "@/models/user";
 import { hash } from "bcryptjs";
 import { CredentialsSignin } from "next-auth";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function login(formData: FormData) {

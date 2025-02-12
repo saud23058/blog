@@ -77,9 +77,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!isExist) {
             await userModel.create({ email, name, image });
           }
-        } catch (error: any) {
+        } catch (error) {
           throw new Error(
-            "Unable to continue through GitHub: " + error.message
+            "Unable to continue through GitHub: " + error
           );
         }
       }

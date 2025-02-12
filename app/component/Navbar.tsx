@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { auth, signOut } from "@/auth";
+import { auth} from "@/auth";
 import Link from "next/link";
 import React from "react";
 
@@ -21,27 +21,27 @@ const Navbar = async () => {
                 create
             </Link>
              </button>
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/" });
-              }}
-            >
-              <button
-                type="submit"
-                className="text-pink-600 p-2 rounded-md font-semibold w-24"
-              >
-                Sign Out
-              </button>
-            </form>
+            
            
             
-            <Link
-              href={`/user/${session.user.id}`}
-              className="h-12 w-12 flex justify-center items-center bg-blue-300 rounded-full"
-            >
-              <span className="font-bold">{session.user?.name![0]}</span>
-            </Link>
+             <Link
+  href={`/user/${session.user?.id}`}
+  className="h-12 w-12 flex justify-center items-center bg-blue-300 rounded-full overflow-hidden"
+>
+  {session.user?.image ? (
+    <Image
+      src={session.user.image}
+      alt="User Profile"
+      width={48} 
+      height={48}
+      className="rounded-full object-cover"
+    />
+  ) : (
+    <span className="font-bold text-white text-lg">
+      {session.user?.name?.charAt(0) || "?"}
+    </span>
+  )}
+</Link>
             
           </>
         ) : (
