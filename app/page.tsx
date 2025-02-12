@@ -5,7 +5,7 @@ import Link from "next/link";
 
 
 const Home = async () => {
-  const response = await fetch(`${process.env.URL}/api/post/fetch-all-posts`, {
+  const response = await fetch(`http://localhost:3000/api/post/fetch-all-posts`, {
     cache: "no-store", 
   });
   const { posts } = await response.json();
