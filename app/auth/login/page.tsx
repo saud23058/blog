@@ -16,8 +16,8 @@ const Login = () => {
     try {
       await login(formData);
       router.push("/"); 
-    } catch (error: any) {
-      setError(error?.message as string);
+    } catch (error: unknown) {
+      setError(error as string);
     }
   };
 

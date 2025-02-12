@@ -21,8 +21,8 @@ const Signup = () => {
       const result = await register(formData);
       setSuccess(result.message);
       router.push("/");
-    } catch (error: any) {
-      setError(error?.message as string);
+    } catch (error: unknown) {
+      setError(error as string);
     }
   };
 
