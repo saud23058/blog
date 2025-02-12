@@ -22,7 +22,7 @@ const CreatePostForm = () => {
     };
 
     try {
-      await axios.post(`/api/post/create-post`, formValues).then((res) => {
+      await axios.post(`${process.env.URl}/api/post/create-post`, formValues).then((res) => {
         alert(res.data.message)
       });
 
