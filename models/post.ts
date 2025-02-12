@@ -7,10 +7,10 @@ interface IPost extends Document {
   category: string;
   views: number;
   author: {
-    id: string,
+    author_id: string,
     name:string
   },
-  details:string
+  detail:string
 }
 
 const postSchema = new Schema<IPost>(

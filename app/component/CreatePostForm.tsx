@@ -1,12 +1,38 @@
 "use client";
+
 import MDEditor from "@uiw/react-md-editor";
+import axios from "axios";
 import React, { useState } from "react";
 
 const CreatePostForm = () => {
   const [detail, setDetail] = useState("");
-  const isPending = false;
+  const [error, setError] = useState("");
+  const [isPending, setIsPending] = useState(false);
+
+  const submitHandler = async (formData: FormData) => {
+    setIsPending(true);
+    setError("");
+    const fromValues = {
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      category: formData.get("category"),
+      imageUrl: formData.get("imageUrl"),
+      detail,
+    };
+    try {
+      await axios.post(
+        "http://localhost:3000/api/post/create-post",
+        fromValues
+      );
+    } catch (error: any) {
+      setError(error?.message);
+    } finally {
+      setIsPending(false);
+    }
+  };
+
   return (
-    <form action={() => {}} className="mt-12 mb-8 flex flex-col">
+    <form action={submitHandler} className="mt-12 mb-8 flex flex-col">
       <div className="flex flex-col w-[583px] h-max pb-3">
         <label className="font-bold text-xl mb-2" htmlFor="title">
           Title
@@ -14,6 +40,7 @@ const CreatePostForm = () => {
         <input
           id="title"
           type="text"
+          name="title"
           placeholder="Enter your post title"
           required
           className="outline-none border-4 text-xl border-black p-4 rounded-full"
@@ -25,6 +52,7 @@ const CreatePostForm = () => {
         </label>
         <textarea
           id="description"
+          name="description"
           placeholder="Enter your post description"
           required
           className="outline-none border-4 text-xl border-black p-4 rounded-3xl"
@@ -36,6 +64,7 @@ const CreatePostForm = () => {
         </label>
         <input
           id="imageUrl"
+          name="imageUrl"
           type="text"
           placeholder="Paste your post url"
           required
@@ -48,6 +77,7 @@ const CreatePostForm = () => {
         </label>
         <input
           id="category"
+          name="category"
           type="text"
           placeholder="like Health, Technology ...."
           required
@@ -73,8 +103,12 @@ const CreatePostForm = () => {
           }}
         />
       </div>
-      <button disabled={isPending} className="mt-4 mb-5 bg-pink-500 p-4 text-xl font-bold rounded-xl border-black border-4">
-        {isPending ? 'Submitting....':'Submit your post'}
+      <p className="text-red-500 px-4">{error}</p>
+      <button
+        disabled={isPending}
+        className="mt-4 mb-5 bg-pink-500 text-white p-4 text-xl font-bold rounded-xl border-black border-4"
+      >
+        {isPending ? "Submitting...." : "Submit your post"}
       </button>
     </form>
   );
