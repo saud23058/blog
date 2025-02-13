@@ -8,7 +8,7 @@ import { auth } from "@/auth";
 const md = markdown();
 
 const PostDetails = async ({ params }: { params: { id: string } }) => {
-  const res = await fetch(`${process.env.PUBLIC_URL}/api/post/post-details?id=${params.id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/post-details?id=${params.id}`, {
     cache: "no-store",
   });
 
