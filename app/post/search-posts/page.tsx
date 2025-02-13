@@ -15,7 +15,7 @@ const Search = () => {
   const searchHandler = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/post/search-post`,
+        `${process.env.PUBLIC_URL}/api/post/search-post`,
         { query: search }
       );
       
